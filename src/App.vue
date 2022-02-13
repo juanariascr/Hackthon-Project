@@ -4,7 +4,7 @@
     <Main v-if="currentView == 'Main'" @startTest="setView('ReactionTest')"/>
     <ReactionTest v-else-if="currentView == 'ReactionTest'" @finishReactionTest="finishReactionHandler"/>
     <VisionTest v-else-if="currentView == 'VisionTest'" @finishVisionTest="finishVisionHandler"/>
-    <Conclusion v-else-if = "currentView == 'Conclusion'" />
+    <Conclusion v-else-if = "currentView == 'Conclusion'"  :testResults ="testResults" />
 
   </div>
 </template>
@@ -29,8 +29,6 @@ export default {
       testResults: {
         reactions: [],
         visionResponses: 0,
-      },
-      visualResults: {
         visuals: [],
       },
     }
@@ -46,8 +44,8 @@ export default {
       this.setView('VisionTest')
     },
     finishVisionHandler(results) {
-        this.visualResults.visuals = results
-        console.log(this.visualResults.visuals)
+        this.testResults.visuals = results
+        console.log(this.testResults.visuals)
         this.setView('Conclusion')
     }
   },
