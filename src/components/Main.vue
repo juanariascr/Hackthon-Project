@@ -1,12 +1,12 @@
 <template>
   <div class="component-main">
     <div class="header">
-      <h1>Drive Safer.</h1>
+      <h1>Drive. Safer.</h1>
       <h4>Take our test to see if you're ready to hit the road.</h4>
     </div>
     <div class="svg-holder-car">
     </div>
-    <button @click="$emit('startTest')" class="button is-primary fixed-bottom start-test">Begin Test</button>
+    <button @click="$emit('startTest')" class="button is-light fixed-bottom start-test">Begin Test</button>
   </div>
 </template>
 

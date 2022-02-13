@@ -1,7 +1,7 @@
 <template>
   <div class="component-vision-test">
       <modal :active="showInstructions" primaryLabel="Start" title="Instructions" @click="hideInstructions" @cancel="hideInstructions">
-        This test judges your vision. Read the text and enter what you see.
+        This test judges your vision. Read the text and enter what you see. Remove any corrective lenses. Hold your device at an arm's length away. Do not zoom into the text.
       </modal>
       <!--Stage-->
       <div id="stage">

@@ -59,7 +59,7 @@ export default {
 @import "https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css";
 
 #app {
-  font-family: 'Rubik', Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Rubik', Avenir, Helvetica, Arial, sans-serif !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

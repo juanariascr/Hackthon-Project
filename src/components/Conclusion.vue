@@ -3,7 +3,7 @@
       <pass v-if="result === 'pass'" />
       <avoid v-else-if="result === 'avoid'" />
       <fail v-else-if="result === 'fail'" />
-      <button @click="$emit('finishConclusion')" class="button is-primary fixed-bottom start-test">Return Home</button>
+      <button @click="$emit('finishConclusion')" class="button is-light fixed-bottom start-test">Return Home</button>
 
   </div>
 </template>
@@ -32,7 +32,7 @@ export default {
   methods: {
     calculateReactions() {
       let average = this.testResults.reactions.reduce((acc, prev) => acc + prev) / this.testResults.reactions.length
-      return average < 450
+      return average < 393
     },
 
     calculateVisuals() {
@@ -78,6 +78,5 @@ export default {
   width: 100px;
   font-size: 24px;
   width: 80%;
-
 }
 </style>

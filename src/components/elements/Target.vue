@@ -22,9 +22,6 @@ export default {
         yPos: String,
     },
     methods: {
-        printPositions() {
-            console.log(this.xPos, this.yPos)
-        }
     },
 }
 </script>

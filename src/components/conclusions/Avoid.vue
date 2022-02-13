@@ -2,7 +2,7 @@
   <div class="component-conclusion component-avoid">
     <div class="header">
       <h1><span class="highlight-text">Avoid</span> the streets.</h1>
-      <h4>You’re not fit to drive right now. Get a ride.</h4>
+      <h4>Seek to avoid driving where possible, you’re close to being an unsafe driver.</h4>
     </div>
     <div class="svg-holder">
     </div>
