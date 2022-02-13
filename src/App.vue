@@ -29,6 +29,9 @@ export default {
       testResults: {
         reactions: [],
       },
+      visualResults: {
+        visuals: [],
+      },
     }
   },
   methods: {
