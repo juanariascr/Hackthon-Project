@@ -5,7 +5,6 @@
     <ReactionTest v-else-if="currentView == 'reactionTest'" @finishReactionTest="finishReactionTest"/>
     <VisionTest v-else-if="currentView == 'visionTest'" @finishVisionTest="finishVisionTest"/>
     <Conclusion v-else-if = "currentView == 'Conclusion'" />
-
   </div>
 </template>
 
@@ -28,7 +27,6 @@ export default {
       currentView: 'home',
       testResults: {
         reactions: [],
-        visionResponses: 0,
       },
       visualResults: {
         visuals: [],
@@ -39,15 +37,16 @@ export default {
     setView(view) {
       this.currentView = view
     },
-    finishReactionHandler(results) {
+    finishReactionTest(results) {
       this.testResults.reactions = results
       console.log(this.testResults.reactions)
       
-      this.setView('VisionTest')
+      this.setView('visionTest')
     },
-    finishVisionHandler(results) {
+    finishVisionTest(results) {
         this.visualResults.visuals = results
         console.log(this.visualResults.visuals)
+
         this.setView('Conclusion')
     }
   },
@@ -56,14 +55,13 @@ export default {
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,700;0,800;0,900;1,400&display=swap');
-@import "https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css";
 
 #app {
   font-family: 'Rubik', Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: white;
+  color: #2c3e50;
   margin: 0;
   min-height: 100vh;
   overflow-x: hidden;

@@ -17,10 +17,10 @@ export default {
   name: 'VisionTest',
   components: {
     Letters
+    
   },
   props: {
   },
-
   data() {
       return {
         visionResponses: [],
@@ -34,13 +34,11 @@ export default {
     console.log('Adding Letters initially')
     this.addLetters()
   },
-
   methods: {
     
     handleClicked() {
         this.visionResponses.push(this.actualAnswer == this.userAnswer)
         
-
         // Go to next test
         if(this.visionResponses.length < 5) {
             this.addLetters()
@@ -48,7 +46,6 @@ export default {
             this.$emit('finishVisionResponses', this.visionResponses)
         }
     },
-
     addLetters() {
         const letters = "zxcvbnmasdfghjklqwertyuiop"
         for(let i=0; i<5; i++)
@@ -60,11 +57,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
-
 .component-reaction-test {
     color: red;
     font-size: 48px;
 }
-
-
 </style>

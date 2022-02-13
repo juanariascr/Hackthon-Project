@@ -42,6 +42,7 @@ export default {
             this.addTarget()
         } else {
             this.$emit('finishReactionTest', this.reactionTimes)
+            
         }
     },
 
