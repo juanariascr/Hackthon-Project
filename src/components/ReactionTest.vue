@@ -1,16 +1,21 @@
 <template>
   <div class="component-reaction-test">
-      <div id="stage"></div>
-      <Target :xPos="currentPos.x" :yPos="currentPos.y" v-if="showTarget" @click="handleClicked" />
+    <modal :active="showInstructions" primaryLabel="Start" title="Instructions" @click="hideInstructions" @cancel="hideInstructions">
+        This test judges your reactions. Press the white dot when it appears.
+    </modal>
+    <div id="stage"></div>
+    <Target :xPos="currentPos.x" :yPos="currentPos.y" v-if="showTarget" @click="handleClicked" />
   </div>
 </template>
 
 <script>
+import Modal from './elements/Modal.vue'
 import Target from './elements/Target.vue'
 
 export default {
   name: 'ReactionTest',
   components: {
+    Modal,
     Target
   },
   props: {
@@ -24,13 +29,9 @@ export default {
         currentPos: {
             x: '0px',
             y: '0px'
-        }
+        },
+        showInstructions: true,
       }
-  },
-  mounted() {
-    // Add the target initially
-    console.log('Adding target initially')
-    this.addTarget()
   },
   methods: {
     handleClicked() {
@@ -50,10 +51,14 @@ export default {
         setTimeout(function() {
             this.showTarget = true
             this.startTime  = Date.now()
-            this.currentPos.x = Math.floor((document.body.clientWidth  - 100) * Math.random() + 100) + 'px'
-            this.currentPos.y = Math.floor((document.body.clientHeight - 100) * Math.random() + 100) + 'px'
+            this.currentPos.x = Math.floor((document.body.clientWidth  - 200) * Math.random() + 100) + 'px'
+            this.currentPos.y = Math.floor((document.body.clientHeight - 200) * Math.random() + 100) + 'px'
             console.log(this.currentPos)
         }.bind(this), Math.floor( 500 + (Math.random() * 1500)) )
+    },
+    hideInstructions() {
+      this.showInstructions = false
+      this.addTarget()
     },
   },
 }

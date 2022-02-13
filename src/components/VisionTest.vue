@@ -1,59 +1,62 @@
 <template>
   <div class="component-vision-test">
-      HELLO Vision Test!
-      {{ actualAnswer }}
+      <modal :active="showInstructions" primaryLabel="Start" title="Instructions" @click="hideInstructions" @cancel="hideInstructions">
+        This test judges your vision. Read the text and enter what you see.
+      </modal>
       <!--Stage-->
-      <div id="stage"></div>
-      <Letters size="12px" />
-      <input type ="text" v-model="this.userAnswer" maxlength="5" />
-      <button @click="handleClick">Submit</button>
+      <div id="stage">
+        <span class="vision-test">{{ actualAnswer }}</span>
+        <input v-on:keyup.enter="handleClicked" class="input is-primary" placeholder="Enter your response" type ="text" v-model="this.userAnswer" maxlength="5" />
+        <br>
+        <button class="button large is-primary" @click="handleClicked">Submit</button>
+      </div>
   </div>
 </template>
 
 <script>
-import Letters from './elements/Letters.vue'
+import Modal from './elements/Modal.vue'
 
 export default {
   name: 'VisionTest',
   components: {
-    Letters
+    Modal
   },
   props: {
   },
-
   data() {
       return {
         visionResponses: [],
         matchAnswer: false,
-        userAnswer: 'text',
+        userAnswer: '',
         actualAnswer: '',
+        showInstructions: true,
       }
   },
-  mounted() {
-    // Add the Letters initially
-    console.log('Adding Letters initially')
-    this.addLetters()
-  },
-
   methods: {
-    
     handleClicked() {
-        this.visionResponses.push(this.actualAnswer == this.userAnswer)
-        
+      console.log(this.visionResponses)
+      this.visionResponses.push(this.actualAnswer === this.userAnswer.toLowerCase())
 
-        // Go to next test
-        if(this.visionResponses.length < 5) {
-            this.addLetters()
-        } else {
-            this.$emit('finishVisionResponses', this.visionResponses)
-        }
+      // Go to next test
+      if(this.visionResponses.length < 5) {
+          this.addLetters()
+      } else {
+          this.$emit('finishVisionTest', this.visionResponses)
+      }
     },
 
     addLetters() {
         const letters = "zxcvbnmasdfghjklqwertyuiop"
+        this.actualAnswer = ''
+        this.userAnswer = ''
         for(let i=0; i<5; i++)
-        this.actualAnswer += letters[Math.floor(Math.random()*letters.length)]
+          this.actualAnswer += letters[Math.floor(Math.random() * letters.length)]
     },
+
+    hideInstructions() {
+      this.showInstructions = false
+      this.addLetters()
+    }
   },
 }
 </script>
@@ -61,10 +64,26 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
 
-.component-reaction-test {
-    color: red;
-    font-size: 48px;
+.component-vision-test {
+    height: 100%;
+    width: 100%;
+    background-color: white;
 }
 
+.component-vision-test #stage {
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 80vw;
+  left: 50%;
 
+}
+
+.component-vision-test .vision-test {
+  color: black;
+  text-transform: uppercase;
+  font-size: 10px;
+  margin: 10px;
+}
 </style>

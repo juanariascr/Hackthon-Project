@@ -11,16 +11,20 @@
 </template>
 
 <script>
+
 export default {
   name: 'Main',
+  components: {
+  },
   props: {
     
   },
   data() {
     return {
-      textString: 'text'
+      textString: 'text',
+      showInstructions: true,
     }
-  }
+  },
 }
 </script>
 

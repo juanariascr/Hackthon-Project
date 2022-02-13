@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     {{ currentView }}
-    <Main v-if="currentView == 'home'" @startTest="setView('reactionTest')"/>
-    <ReactionTest v-else-if="currentView == 'reactionTest'" @finishReactionTest="finishReactionTest"/>
-    <VisionTest v-else-if="currentView == 'visionTest'" @finishVisionTest="finishVisionTest"/>
+    <Main v-if="currentView == 'Main'" @startTest="setView('ReactionTest')"/>
+    <ReactionTest v-else-if="currentView == 'ReactionTest'" @finishReactionTest="finishReactionHandler"/>
+    <VisionTest v-else-if="currentView == 'VisionTest'" @finishVisionTest="finishVisionHandler"/>
     <Conclusion v-else-if = "currentView == 'Conclusion'" />
 
   </div>
@@ -25,7 +25,7 @@ export default {
   },
   data() {
     return {
-      currentView: 'home',
+      currentView: 'Main',
       testResults: {
         reactions: [],
         visionResponses: 0,
@@ -65,7 +65,8 @@ export default {
   text-align: center;
   color: white;
   margin: 0;
-  min-height: 100vh;
+  height: 100vh !important;
+  max-width: 100vw;
   overflow-x: hidden;
   overflow-y: hidden;
   background: url(assets/bg.png);
