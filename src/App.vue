@@ -1,10 +1,9 @@
 <template>
   <div id="app">
-    {{ currentView }}
     <Main v-if="currentView == 'Main'" @startTest="setView('ReactionTest')"/>
     <ReactionTest v-else-if="currentView == 'ReactionTest'" @finishReactionTest="finishReactionHandler"/>
     <VisionTest v-else-if="currentView == 'VisionTest'" @finishVisionTest="finishVisionHandler"/>
-    <Conclusion v-else-if = "currentView == 'Conclusion'"  :testResults ="testResults" />
+    <Conclusion v-else-if = "currentView == 'Conclusion'"  @finishConclusion="finishConclusionHandler" :testResults ="testResults" />
 
   </div>
 </template>
@@ -47,6 +46,9 @@ export default {
         this.testResults.visuals = results
         console.log(this.testResults.visuals)
         this.setView('Conclusion')
+    },
+    finishConclusionHandler() {
+      this.setView('Main')
     }
   },
 }

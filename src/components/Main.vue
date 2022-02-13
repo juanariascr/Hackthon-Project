@@ -6,7 +6,7 @@
     </div>
     <div class="svg-holder-car">
     </div>
-    <button @click="$emit('startTest')" class="button is-primary fixed-bottom start-test">BEGIN TEST</button>
+    <button @click="$emit('startTest')" class="button is-primary fixed-bottom start-test">Begin Test</button>
   </div>
 </template>
 

@@ -1,25 +1,23 @@
 <template>
   <div class="component-conclusion">
-      HELLO2.0!
-      <br>
-      <button class="button large is-primary" @click="CalculateValues">Calculate Avg Reaction Score</button>
-      <br>
-      {{Avg}}{{" : "}}{{temp}}
-      <br>
-      <br>
-      <button class="button large is-primary" @click="CalculateVision">Calculate Vision Score</button>
-      <br>
-      {{vision}}{{" : "}}{{visiontemp}}
-      <!--Stage-->
+      <pass v-if="result === 'pass'" />
+      <avoid v-else-if="result === 'avoid'" />
+      <fail v-else-if="result === 'fail'" />
+      <button @click="$emit('finishConclusion')" class="button is-primary fixed-bottom start-test">Return Home</button>
+
   </div>
 </template>
 
 
 <script>
+import Pass from './conclusions/Pass.vue'
+import Avoid from './conclusions/Avoid.vue'
+import Fail from './conclusions/Fail.vue'
 
 export default {
   name: 'Conclusion',
   components: {
+    Pass, Avoid, Fail
   },
   props: {
       testResults: {
@@ -28,33 +26,33 @@ export default {
   },
   data() {
       return {
-        Avg: 0,
-        temp: '',
-        vision: 0,
-        visiontemp: ''
+        result: '',
       }
   },
   methods: {
-    CalculateValues() {
-      this.Avg = (this.testResults.reactions[0]+this.testResults.reactions[1]+this.testResults.reactions[2]+this.testResults.reactions[3]+this.testResults.reactions[4])/5
-      if(this.Avg > 450){
-        this.temp = 'fail'
-      }
-      else{
-        this.temp = 'pass'
-      }
+    calculateReactions() {
+      let average = this.testResults.reactions.reduce((acc, prev) => acc + prev) / this.testResults.reactions.length
+      return average < 450
     },
 
-    CalculateVision() {
-      for(let i=0; i<5; i++){
-        this.vision += this.testResults.visuals[i]
-      }
-      if(this.vision >= 4){
-        this.visiontemp = 'pass'
-      }
-      else{
-        this.visiontemp = 'fail'
-      }
+    calculateVisuals() {
+      // Make sure they got all the answers right
+      return this.testResults.visuals.reduce((acc, prev) => acc && prev, true)
+    }
+  },
+  mounted() {
+    let reactionsPass = this.calculateReactions() 
+    let visualsPass = this.calculateVisuals()
+
+    if(reactionsPass && visualsPass) {
+      // Pass condition
+      this.result = 'pass'
+    } else if (reactionsPass || visualsPass) {
+      // Avoid condition
+      this.result = 'avoid'
+    } else {
+      // Fail condition
+      this.result = 'fail'
     }
   }
 }
@@ -62,7 +60,24 @@ export default {
 
 <style>
 .component-conclusion {
-    color: red;
-    font-size: 48px;
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+}
+
+.component-conclusion .fixed-bottom {
+  position: fixed;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.component-conclusion .start-test {
+  color: black;
+  background-color: rgb(253, 252, 239);
+  width: 100px;
+  font-size: 24px;
+  width: 80%;
+
 }
 </style>
