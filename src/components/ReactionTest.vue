@@ -1,7 +1,5 @@
 <template>
   <div class="component-reaction-test">
-      HELLO!
-      <!--Stage-->
       <div id="stage"></div>
       <Target :xPos="currentPos.x" :yPos="currentPos.y" v-if="showTarget" @click="handleClicked" />
   </div>
@@ -51,8 +49,8 @@ export default {
         setTimeout(function() {
             this.showTarget = true
             this.startTime  = Date.now()
-            this.currentPos.x = Math.floor((document.body.clientWidth - 100) * Math.random() + 100) + 'px'
-            this.currentPos.y = Math.floor((document.body.clientWidth - 100) * Math.random() + 100) + 'px'
+            this.currentPos.x = Math.floor((document.body.clientWidth  - 100) * Math.random() + 100) + 'px'
+            this.currentPos.y = Math.floor((document.body.clientHeight - 100) * Math.random() + 100) + 'px'
             console.log(this.currentPos)
         }.bind(this), Math.floor( 500 + (Math.random() * 1500)) )
     },

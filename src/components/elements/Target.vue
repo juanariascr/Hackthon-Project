@@ -18,8 +18,8 @@
 export default {
     name: 'Target',
     props: {
-        xPos: Number,
-        yPos: Number,
+        xPos: String,
+        yPos: String,
     },
     methods: {
         printPositions() {
