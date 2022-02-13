@@ -1,5 +1,5 @@
 <template>
-    <div class="reaction-target"></div>
+    <div :style="{ top: yPos, left: xPos }" class="reaction-target"></div>
 </template>
 
 <style>
@@ -10,7 +10,7 @@
     left: 50%;
     position: absolute;
     background-color: white;
-    border-radius: 100%;    
+    border-radius: 100%;
 }
 </style>
 
@@ -18,9 +18,13 @@
 export default {
     name: 'Target',
     props: {
-
+        xPos: Number,
+        yPos: Number,
     },
     methods: {
+        printPositions() {
+            console.log(this.xPos, this.yPos)
+        }
     },
 }
 </script>

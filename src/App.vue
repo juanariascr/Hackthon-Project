@@ -2,7 +2,7 @@
   <div id="app">
     {{ currentView }}
     <Main v-if="currentView == 'home'" @startTest="setView('reactionTest')"/>
-    <ReactionTest v-else-if="currentView == 'reactionTest'" @finishReactionTest="finishReactionTest"/>
+    <ReactionTest v-else-if="currentView == 'reactionTest'" @finishReactionTest="finishReactionHandler"/>
   </div>
 </template>
 
@@ -21,6 +21,7 @@ export default {
       currentView: 'home',
       testResults: {
         reactions: [],
+        visionResponses: 0,
       },
     }
   },
@@ -28,7 +29,7 @@ export default {
     setView(view) {
       this.currentView = view
     },
-    finishReactionTest(results) {
+    finishReactionHandler(results) {
       this.testResults.reactions = results
       console.log(this.testResults.reactions)
       

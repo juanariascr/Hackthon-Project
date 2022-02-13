@@ -3,7 +3,7 @@
       HELLO!
       <!--Stage-->
       <div id="stage"></div>
-      <Target v-if="showTarget" @click="handleClicked" />
+      <Target :xPos="currentPos.x" :yPos="currentPos.y" v-if="showTarget" @click="handleClicked" />
   </div>
 </template>
 
@@ -23,6 +23,10 @@ export default {
         reactionTimes: [],
         showTarget: false,
         startTime: -1,
+        currentPos: {
+            x: '0px',
+            y: '0px'
+        }
       }
   },
   mounted() {
@@ -47,6 +51,9 @@ export default {
         setTimeout(function() {
             this.showTarget = true
             this.startTime  = Date.now()
+            this.currentPos.x = Math.floor((document.body.clientWidth - 100) * Math.random() + 100) + 'px'
+            this.currentPos.y = Math.floor((document.body.clientWidth - 100) * Math.random() + 100) + 'px'
+            console.log(this.currentPos)
         }.bind(this), Math.floor( 500 + (Math.random() * 1500)) )
     },
   },
