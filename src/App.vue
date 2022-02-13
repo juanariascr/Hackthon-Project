@@ -1,7 +1,8 @@
 <template>
   <div id="app">
+    {{ currentView }}
     <Main v-if="currentView == 'home'" @startTest="setView('reactionTest')"/>
-    <ReactionTest v-else-if="currentView == 'reactionTest'" />
+    <ReactionTest v-else-if="currentView == 'reactionTest'" @finishReactionTest="finishReactionTest"/>
   </div>
 </template>
 
@@ -17,18 +18,24 @@ export default {
   },
   data() {
     return {
-      currentView: 'home'
+      currentView: 'home',
+      testResults: {
+        reactions: [],
+      },
     }
   },
   methods: {
     setView(view) {
       this.currentView = view
+    },
+    finishReactionTest(results) {
+      this.testResults.reactions = results
+      console.log(this.testResults.reactions)
+      
+      this.setView('visionTest')
     }
-  }
+  },
 }
-
-
-
 </script>
 
 <style>
