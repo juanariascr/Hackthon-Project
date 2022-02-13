@@ -3,18 +3,21 @@
     {{ currentView }}
     <Main v-if="currentView == 'home'" @startTest="setView('reactionTest')"/>
     <ReactionTest v-else-if="currentView == 'reactionTest'" @finishReactionTest="finishReactionHandler"/>
+    <VisionTest v-else-if="currentView == 'visionTest'" @finishVisionTest="finishVisionHandler"/>
   </div>
 </template>
 
 <script>
 import Main from './components/Main.vue'
 import ReactionTest from './components/ReactionTest.vue'
+import VisionTest from './components/VisionTest.vue'
 
 export default {
   name: 'App',
   components: {
     Main,
     ReactionTest,
+    VisionTest
   },
   data() {
     return {
@@ -22,6 +25,9 @@ export default {
       testResults: {
         reactions: [],
         visionResponses: 0,
+      },
+      visualResults: {
+        visuals: [],
       },
     }
   },
@@ -34,6 +40,12 @@ export default {
       console.log(this.testResults.reactions)
       
       this.setView('visionTest')
+    },
+    finishVisionHandler(results) {
+        this.visualResults.visuals = results
+        console.log(this.visualResults.visuals)
+
+        this.setView('Conclusion')
     }
   },
 }
