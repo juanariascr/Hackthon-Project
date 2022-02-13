@@ -5,7 +5,6 @@
     <ReactionTest v-else-if="currentView == 'reactionTest'" @finishReactionTest="finishReactionTest"/>
     <VisionTest v-else-if="currentView == 'visionTest'" @finishVisionTest="finishVisionTest"/>
     <Conclusion v-else-if = "currentView == 'Conclusion'" />
-
   </div>
 </template>
 
@@ -29,6 +28,9 @@ export default {
       testResults: {
         reactions: [],
       },
+      visualResults: {
+        visuals: [],
+      },
     }
   },
   methods: {
@@ -39,11 +41,12 @@ export default {
       this.testResults.reactions = results
       console.log(this.testResults.reactions)
       
-      this.setView('VisionTest')
+      this.setView('visionTest')
     },
     finishVisionTest(results) {
         this.visualResults.visuals = results
         console.log(this.visualResults.visuals)
+
         this.setView('Conclusion')
     }
   },
